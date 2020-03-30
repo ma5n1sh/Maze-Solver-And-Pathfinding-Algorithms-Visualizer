@@ -1,9 +1,9 @@
 package gui;
 
-public class pair {
+public class xyPair {
     public int x,y;
 
-    public pair(int x,int y) {
+    public xyPair(int x, int y) {
         this.x = x;
         this.y=y;
     }

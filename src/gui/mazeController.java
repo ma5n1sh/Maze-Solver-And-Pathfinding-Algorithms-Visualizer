@@ -7,7 +7,7 @@ import org.newdawn.slick.Graphics;
 
 public class mazeController {
     mazeData.maze maze=new maze();
-    BFS b=new BFS(maze);
+    Dijkstra b=new Dijkstra(maze);
 
     public void draw (Graphics g){
         for(int i=0;i<15;i++){
@@ -19,6 +19,10 @@ public class mazeController {
                 else if(maze.arr[i][j]==4){g.setColor(Color.cyan);}
                 else{g.setColor(Color.green);}
                 g.fillRect(10+40*j,100+40*i,39,39);
+                if(maze.obs[i][j]>1) {
+                    g.setColor(Color.black);
+                    g.drawString(Integer.toString(maze.obs[i][j]),10+40*j+15,100+40*i+15);
+                }
                 g.setColor(Color.white);
                 g.drawRect(10+40*j,100+40*i,40,40);
             }
