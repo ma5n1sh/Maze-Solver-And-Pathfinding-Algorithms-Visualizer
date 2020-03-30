@@ -20,6 +20,11 @@ public class arraylist {
         }
         return -1;
     }
+    public xyPair peek(){
+        difCoorPair tmp=storage.get(0);
+        return tmp.pair;
+    }
+
     public difCoorPair getMin(){
         difCoorPair tmp=storage.get(0);
         storage.remove(0);

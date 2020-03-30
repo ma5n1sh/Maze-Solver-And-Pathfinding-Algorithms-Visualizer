@@ -10,13 +10,14 @@ public class Menu extends BasicGameState {
     boolean flag=false;
     theEyeOfAgamotto e=new theEyeOfAgamotto();
 
-    mazeController cont=new mazeController();
+    mazeController cont;
 
     public Menu(int state) throws SlickException {
+
     }
 
     public void init(GameContainer gc, StateBasedGame sbg )throws SlickException {
-
+        cont=new mazeController();
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
