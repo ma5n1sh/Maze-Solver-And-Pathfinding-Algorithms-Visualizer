@@ -14,7 +14,7 @@ import mazeData.maze;
 
         private int distanceCalculator(xyPair point){
             int temp=(int)(Math.sqrt(Math.pow(point.x-maze.endX,2)+Math.pow(point.y-maze.endY,2)));
-            return 2*temp/3;
+            return (int) 1.8*temp;
         }
 
 
@@ -32,8 +32,9 @@ import mazeData.maze;
             map.put(tmp.toString(),point);
         }
 
-        public void finish(xyPair xyPair){
+        public void finish(){
             stop=true;
+            xyPair xyPair=pq.getMin().pair;
             xyPair =map.get(xyPair.toString());
             while(xyPair.x!=maze.startX|| xyPair.y!=maze.startY){e.waiter();
                 maze.arr[xyPair.y][xyPair.x]=4;
@@ -58,7 +59,7 @@ import mazeData.maze;
                     pq.add(new difCoorPair(arr[point.y][point.x]+maze.obs[point.y][point.x+1]+distanceCalculator(tmp),tmp));
                     addToMap(tmp,point);
                 }
-                if(point.y==maze.endY&&point.x+1==maze.endX){finish(tmp);return;}
+                if(pq.peek().y==maze.endY&&pq.peek().x==maze.endX){finish();return;}
                 maze.arr[point.y][point.x+1]=2;
                 e.waiter();
             }
@@ -74,7 +75,7 @@ import mazeData.maze;
                     pq.add(new difCoorPair(arr[point.y][point.x]+maze.obs[point.y][point.x+1]+distanceCalculator(tmp),tmp));
                     addToMap(tmp,point);
                 }
-                if(point.y==maze.endY&&point.x-1==maze.endX){finish(tmp);return;}
+                if(pq.peek().y==maze.endY&&pq.peek().x==maze.endX){finish();return;}
                 maze.arr[point.y][point.x-1]=2;
                 e.waiter();
             }
@@ -90,7 +91,7 @@ import mazeData.maze;
                     pq.add(new difCoorPair(arr[point.y][point.x]+maze.obs[point.y+1][point.x]+distanceCalculator(tmp),tmp));
                     addToMap(tmp,point);
                 }
-                if(point.y+1==maze.endY&&point.x==maze.endX){finish(tmp);return;}
+                if(pq.peek().y==maze.endY&&pq.peek().x==maze.endX){finish();return;}
                 maze.arr[point.y+1][point.x]=2;
                 e.waiter();
             }
@@ -106,7 +107,7 @@ import mazeData.maze;
                     pq.add(new difCoorPair(arr[point.y][point.x]+maze.obs[point.y-1][point.x]+distanceCalculator(tmp),tmp));
                     addToMap(tmp,point);
                 }
-                if(point.y-1==maze.endY&&point.x==maze.endX){finish(tmp);return;}
+                if(pq.peek().y==maze.endY&&pq.peek().x==maze.endX){finish();return;}
                 maze.arr[point.y-1][point.x]=2;
                 e.waiter();
             }

@@ -22,7 +22,7 @@ public class maze {
 
     }
     public void reversecell(int xpos,int ypos){
-        xpos=xpos-10;
+        xpos=xpos-15;
         xpos=xpos/20;
         ypos=ypos-100;
         ypos=ypos/20;
