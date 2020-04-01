@@ -38,7 +38,7 @@ public class Menu extends BasicGameState {
         if(!Mouse.isButtonDown(0)&&!Mouse.isButtonDown(1)){
             flag=false;
         }
-        e.time+=delta;
+        //e.time+=delta;
     }
 
     public void window(String window, int delta, StateBasedGame sbg) {}

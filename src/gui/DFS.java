@@ -32,7 +32,7 @@ public class DFS {
         private void addAdjacents(xyPair point){
             if(maze.arr[point.y][point.x]!=-1)maze.arr[point.y][point.x]=3;
             if(maze.arr[maze.startY][maze.startX]!=-1){maze.arr[maze.startY][maze.startX]=-1;}
-            if(point.x+1<31&&(maze.arr[point.y][point.x+1]==0||maze.arr[point.y][point.x+1]==-1)){
+            if(point.x+1<maze.arr[0].length&&(maze.arr[point.y][point.x+1]==0||maze.arr[point.y][point.x+1]==-1)){
                 xyPair tmp=new xyPair(point.x+1,point.y);
                 q.add(tmp);
                 addToMap(tmp,point);
@@ -48,7 +48,7 @@ public class DFS {
                 else maze.arr[point.y][point.x-1]=2;
                 e.waiter();
             }
-            if(point.y+1<15&&(maze.arr[point.y+1][point.x]==0||maze.arr[point.y+1][point.x]==-1)){
+            if(point.y+1<maze.arr.length&&(maze.arr[point.y+1][point.x]==0||maze.arr[point.y+1][point.x]==-1)){
                 xyPair tmp=new xyPair(point.x,point.y+1);
                 q.add(tmp);
                 addToMap(tmp,point);

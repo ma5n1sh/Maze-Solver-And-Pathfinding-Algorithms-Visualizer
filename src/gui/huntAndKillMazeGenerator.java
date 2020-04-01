@@ -75,13 +75,21 @@ public class huntAndKillMazeGenerator {
                     xyPair destination=check4adj(source);
                     if(destination.x!=-1){
                         if(destination.x==source.x){
-                            maze.arr[(int) (source.y+Math.signum(destination.y-source.y))][source.x]=0;
+                            maze.arr[(int) (source.y+Math.signum(destination.y-source.y))][source.x]=3;
                             visited[(int) (source.y+Math.signum(destination.y-source.y))][source.x]=true;
+                            maze.arr[destination.y][destination.x]=3;
+                            e.waiter();e.waiter();e.waiter();
+                            maze.arr[(int) (source.y+Math.signum(destination.y-source.y))][source.x]=0;
                             maze.arr[destination.y][destination.x]=0;
                             visited[destination.y][destination.x]=true;
                         }
-                        else{maze.arr[source.y][(int) (source.x+Math.signum(destination.x-source.x))]=0;
+                        else{maze.arr[source.y][(int) (source.x+Math.signum(destination.x-source.x))]=3;
                             visited[source.y][(int) (source.x+Math.signum(destination.x-source.x))]=true;
+                            maze.arr[destination.y][destination.x]=3;
+                            e.waiter();
+                            e.waiter();
+                            e.waiter();
+                            maze.arr[source.y][(int) (source.x+Math.signum(destination.x-source.x))]=0;
                             maze.arr[destination.y][destination.x]=0;
                             visited[destination.y][destination.x]=true;
                         }
@@ -91,7 +99,7 @@ public class huntAndKillMazeGenerator {
                 }
             }
         }
-        e.waiter();
+
         return new xyPair(-1,-1);
     }
 
@@ -109,7 +117,7 @@ public class huntAndKillMazeGenerator {
             } while (flag);
             start=hunt();
         }
-        int count =10;
+        /*int count =10;
         while(count>0){
             if(maze.arr[(int)(Math.random()*maze.arr.length)][(int)(Math.random()*maze.arr[0].length)]==1){
                 maze.arr[(int)(Math.random()*maze.arr.length)][(int)(Math.random()*maze.arr[0].length)]=0;
@@ -117,12 +125,13 @@ public class huntAndKillMazeGenerator {
                 e.waiter();
                 System.out.println(count);
             }
-        }
+        }*/
         for(int i=0;i<maze.arr.length;i+=2){
             for (int j=0;j<maze.arr[0].length;j+=2){
-                if(maze.arr[i][j]==0){e.waiter();
+                if(maze.arr[i][j]==0){
                     maze.obs[i][j]=(int)(Math.random()*8);
                 }
+
             }
         }
 
