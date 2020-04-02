@@ -66,6 +66,16 @@ public class mazeController {
                         default:g.setColor(new Color(47,47,79));break;
                     }
                 }
+                if(maze.obs[i][j]>1&&maze.arr[i][j]==3) {
+                    switch (maze.obs[i][j]){
+                        case 2:g.setColor(new Color(255,255,102));break;
+                        case 3:g.setColor(new Color(255,255,51));break;
+                        case 4:g.setColor(new Color(255,255,0));break;
+                        case 5:g.setColor(new Color(204,204,0));break;
+                        case 6:g.setColor(new Color(153,153,0));break;
+                        default:g.setColor(new Color(102,102,0));break;
+                    }
+                }
                 g.fillRect(10+10*j,200+10*i,10,10);
             }
 

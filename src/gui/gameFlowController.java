@@ -21,6 +21,7 @@ public class gameFlowController extends StateBasedGame {
     public void initStatesList(GameContainer gc )throws SlickException {
         this.getState(menu).init(gc,this);
         gc.setTargetFrameRate(60);
+        gc.setShowFPS(false);
     }
 
     public static void main(String[] args) {

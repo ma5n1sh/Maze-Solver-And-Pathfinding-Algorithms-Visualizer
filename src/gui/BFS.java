@@ -26,6 +26,12 @@ public class BFS implements mazeSolver{
             xyPair =map.get(xyPair.toString());
         }
         maze.arr[maze.startY][maze.startX]=-1;
+        while(!q.isEmpty()){
+            maze.arr[q.peek().y][q.poll().x]=3;
+            e.waiterhalf();
+        }
+        maze.arr[maze.startY][maze.startX]=-1;
+        maze.arr[maze.endY][maze.endX]=-1;
     }
     private void addAdjacents(xyPair point){
         if(maze.arr[point.y][point.x]!=-1)maze.arr[point.y][point.x]=3;
@@ -70,6 +76,9 @@ public class BFS implements mazeSolver{
         while(!q.isEmpty()&&!Stop){e.waiterhalf();
             addAdjacents(q.poll());
 
+        }
+        for(int i=0;i<maze.arr.length;i++){
+            for(int j=0;j<maze.arr[0].length;j++){if(maze.arr[i][j]==2)maze.arr[i][j]=3;}
         }
         e.isSolving=false;
     }
