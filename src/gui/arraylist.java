@@ -30,5 +30,6 @@ public class arraylist {
         storage.remove(0);
         return tmp;
     }
+    public boolean isEmpty(){return storage.isEmpty();}
 
 }

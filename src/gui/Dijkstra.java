@@ -34,6 +34,10 @@ public class Dijkstra implements mazeSolver{
             maze.arr[xyPair.y][xyPair.x]=4;
             xyPair =map.get(xyPair.toString());
         }
+        while(!pq.isEmpty()){
+            maze.arr[pq.peek().y][pq.getMin().pair.x]=3;
+            e.waiterhalf();
+        }
         maze.arr[maze.startY][maze.startX]=-1;
         maze.arr[maze.endY][maze.endX]=-1;
     }
@@ -113,6 +117,9 @@ public class Dijkstra implements mazeSolver{
         while(!stop&&!pq.storage.isEmpty()){
             addAdjacents(pq.getMin().pair);
             e.waiterhalf();
+        }
+        for(int i=0;i<maze.arr.length;i++){
+            for(int j=0;j<maze.arr[0].length;j++){if(maze.arr[i][j]==2)maze.arr[i][j]=3;}
         }
         e.isSolving=false;
     }

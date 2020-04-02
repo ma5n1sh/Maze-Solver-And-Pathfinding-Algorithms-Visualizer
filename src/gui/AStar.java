@@ -14,7 +14,7 @@ import mazeData.maze;
 
         private int distanceCalculator(xyPair point){
             int temp=(int)(Math.sqrt(Math.pow(point.x-maze.endX,2)+Math.pow(point.y-maze.endY,2)));
-            return (int) 1.8*temp;
+            return (int) 1.8*((temp/8)*8);
         }
 
 
@@ -39,6 +39,12 @@ import mazeData.maze;
             while(xyPair.x!=maze.startX|| xyPair.y!=maze.startY){e.waiter();e.waiter();
                 maze.arr[xyPair.y][xyPair.x]=4;
                 xyPair =map.get(xyPair.toString());
+            }
+            maze.arr[maze.startY][maze.startX]=-1;
+            maze.arr[maze.endY][maze.endX]=-1;
+            while(!pq.isEmpty()){
+                maze.arr[pq.peek().y][pq.getMin().pair.x]=3;
+                e.waiterhalf();
             }
             maze.arr[maze.startY][maze.startX]=-1;
             maze.arr[maze.endY][maze.endX]=-1;
@@ -119,6 +125,9 @@ import mazeData.maze;
             while(!stop&&!pq.storage.isEmpty()){
                 addAdjacents(pq.getMin().pair);
                 e.waiterhalf();
+            }
+            for(int i=0;i<maze.arr.length;i++){
+                for(int j=0;j<maze.arr[0].length;j++){if(maze.arr[i][j]==2)maze.arr[i][j]=3;}
             }
             e.isSolving=false;
         }
