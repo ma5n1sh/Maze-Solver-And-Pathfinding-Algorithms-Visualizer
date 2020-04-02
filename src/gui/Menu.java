@@ -9,6 +9,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Menu extends BasicGameState {
     boolean flag=false;
     theEyeOfAgamotto e=new theEyeOfAgamotto();
+    Image cur;
 
     mazeController cont;
 
@@ -18,10 +19,13 @@ public class Menu extends BasicGameState {
 
     public void init(GameContainer gc, StateBasedGame sbg )throws SlickException {
         cont=new mazeController();
+        cur=new Image("res/cursor.png");
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-        g.setLineWidth(2);
+        int xpos=Mouse.getX();
+        int ypos=820-Mouse.getY();
+        g.drawImage(cur,xpos-20,ypos-20);
         cont.draw(g);
     }
 

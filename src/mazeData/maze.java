@@ -40,12 +40,15 @@ public class maze {
         }
         if(maxObs==7){
             for(int i=0;i<a.size();i++){
-                obs[a.get(i).y][a.get(i).x]=0;
+                if((a.get(i).x==startX&&a.get(i).y==startY)||(a.get(i).x==startX&&a.get(i).y==startY))continue;
+                obs[a.get(i).y][a.get(i).x]=1;
                 arr[a.get(i).y][a.get(i).x]=1;
+
             }
         }
         else{
             for(int i=0;i<a.size();i++){
+                if((a.get(i).x==startX&&a.get(i).y==startY)||(a.get(i).x==startX&&a.get(i).y==startY))continue;
                 obs[a.get(i).y][a.get(i).x]=maxObs+1;
             }
 
@@ -53,7 +56,8 @@ public class maze {
     }
     public void setOnes(ArrayList<xyPair>a){
         for(int i=0;i<a.size();i++){
-            obs[a.get(i).y][a.get(i).x]=0;
+            if((a.get(i).x==startX&&a.get(i).y==startY)||(a.get(i).x==startX&&a.get(i).y==startY))continue;
+            obs[a.get(i).y][a.get(i).x]=1;
             arr[a.get(i).y][a.get(i).x]=0;
         }
     }
@@ -61,19 +65,24 @@ public class maze {
     public void reversecell(int xpos,int ypos){
         xpos=xpos-10;
         xpos=xpos/10;
+        xpos=(xpos/2)*2;
         ypos=ypos-200;
         ypos=ypos/10;
-        ArrayList<xyPair> a=new ArrayList<xyPair>();
+        ypos=(ypos/2)*2;
+        ArrayList<xyPair>a=new ArrayList<>();
         a.add(new xyPair(xpos,ypos));
-        if((xpos-1>=0)&&((xpos-1!=startX)||(ypos!=startY))&&((xpos-1!=endX)||(ypos!=endY)))a.add(new xyPair(xpos-1,ypos));
-        if((ypos-1>=0)&&((xpos!=startX)||(ypos-1!=startY))&&((xpos!=endX)||(ypos-1!=endY)))a.add(new xyPair(xpos ,ypos-1));
-        if((ypos-1>=0)&&(xpos-1>=0)&&((xpos-1!=startX)||(ypos-1!=startY))&&((xpos-1!=endX)||(ypos-1!=endY)))a.add(new xyPair(xpos-1,ypos-1));
-        if((xpos==startX&&ypos==startY)||(xpos==endX&&ypos==endY)){return;}
-        /*if(this.arr[ypos][xpos]==0&&obs[ypos][xpos]<7){this.obs[ypos][xpos]++;}
-        else if(this.arr[ypos][xpos]==1){this.arr[ypos][xpos]=0;this.obs[ypos][xpos]=1;}
-        else{this.arr[ypos][xpos]=1;}*/
-        if(containsOne(a)){setOnes(a);}
-        else{setObs(a);}
+        if(xpos+1<arr[0].length){a.add(new xyPair(xpos+1,ypos));}
+        if(ypos+1<arr.length){a.add(new xyPair(xpos,ypos+1));}
+        if((ypos+1<arr.length)&&(xpos+1<arr[0].length)){a.add(new xyPair(xpos+1,ypos+1));}
+ //       if((xpos==startX&&ypos==startY)||(xpos==endX&&ypos==endY)){return;}
+        if(!containsOne(a)){
+            setObs(a);
+        }
+        else if(containsOne(a)){
+            setOnes(a);
+        }
+
+
     }
 
     public void startEnd(int xpos,int ypos){
