@@ -4,7 +4,7 @@ import mazeData.maze;
 
 import java.util.ArrayList;
 
-public class recursiveBackTrackerMazeGenerator {
+public class recursiveBackTrackerMazeGenerator implements mazeGenerator{
     mazeData.maze maze;
     boolean visited[][];
     theEyeOfAgamotto e=new theEyeOfAgamotto();
@@ -68,10 +68,9 @@ public class recursiveBackTrackerMazeGenerator {
 
     public void generateMaze(){
         xyPair start;
-        int temp=(int)Math.random()*2;
-        if(temp==0){start=new xyPair(0,0);}
-        else{start=new xyPair(1,1);}
+        start=new xyPair((int)(Math.random()*maze.arr[0].length),(int)(Math.random()*maze.arr.length));
         recursiveBackTracker(start);
+        e.isGenerating=false;
     }
 
 }

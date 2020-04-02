@@ -3,7 +3,7 @@ package gui;
 import java.util.HashMap;
 import java.util.Stack;
 
-public class DFS {
+public class DFS implements mazeSolver{
         mazeData.maze maze;
         HashMap<String, xyPair> map=new HashMap<>();
         Stack<xyPair> q=new Stack<>();
@@ -22,7 +22,7 @@ public class DFS {
         public void finish(xyPair xyPair){
             Stop=true;
             xyPair =map.get(xyPair.toString());
-            while(xyPair.x!=maze.startX|| xyPair.y!=maze.startY){e.waiter();
+            while(xyPair.x!=maze.startX|| xyPair.y!=maze.startY){e.waiter();e.waiter();
                 maze.arr[xyPair.y][xyPair.x]=4;
                 xyPair =map.get(xyPair.toString());
             }
@@ -46,7 +46,7 @@ public class DFS {
                 addToMap(tmp,point);
                 if(point.y==maze.endY&&point.x-1==maze.endX){finish(tmp);}
                 else maze.arr[point.y][point.x-1]=2;
-                e.waiter();
+                e.waiterhalf();
             }
             if(point.y+1<maze.arr.length&&(maze.arr[point.y+1][point.x]==0||maze.arr[point.y+1][point.x]==-1)){
                 xyPair tmp=new xyPair(point.x,point.y+1);
@@ -54,7 +54,7 @@ public class DFS {
                 addToMap(tmp,point);
                 if(point.y+1==maze.endY&&point.x==maze.endX){finish(tmp);}
                 else maze.arr[point.y+1][point.x]=2;
-                e.waiter();
+                e.waiterhalf();
             }
             if(point.y-1>=0&&(maze.arr[point.y-1][point.x]==0||maze.arr[point.y-1][point.x]==-1)){
                 xyPair tmp=new xyPair(point.x,point.y-1);
@@ -62,7 +62,7 @@ public class DFS {
                 addToMap(tmp,point);
                 if(point.y-1==maze.endY&&point.x==maze.endX){finish(tmp);}
                 else maze.arr[point.y-1][point.x]=2;
-                e.waiter();
+                e.waiterhalf();
             }
 
         }
@@ -73,6 +73,7 @@ public class DFS {
                 addAdjacents(q.pop());
 
             }
+            e.isSolving=false;
         }
 
     }

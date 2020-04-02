@@ -2,7 +2,7 @@ package gui;
 
 import mazeData.maze;
 import java.util.*;
-public class BFS {
+public class BFS implements mazeSolver{
     maze maze;
     HashMap<String, xyPair> map=new HashMap<>();
     Queue <xyPair>q=new LinkedList();
@@ -21,7 +21,7 @@ public class BFS {
     public void finish(xyPair xyPair){
         Stop=true;
         xyPair =map.get(xyPair.toString());
-        while(xyPair.x!=maze.startX|| xyPair.y!=maze.startY){e.waiter();
+        while(xyPair.x!=maze.startX|| xyPair.y!=maze.startY){e.waiter();e.waiter();
             maze.arr[xyPair.y][xyPair.x]=4;
             xyPair =map.get(xyPair.toString());
         }
@@ -36,7 +36,7 @@ public class BFS {
             addToMap(tmp,point);
             if(point.y==maze.endY&&point.x+1==maze.endX){finish(tmp);}
             else maze.arr[point.y][point.x+1]=2;
-            e.waiter();
+            e.waiterhalf();
         }
         if(point.x-1>=0&&(maze.arr[point.y][point.x-1]==0||maze.arr[point.y][point.x-1]==-1)){
             xyPair tmp=new xyPair(point.x-1,point.y);
@@ -44,7 +44,7 @@ public class BFS {
             addToMap(tmp,point);
             if(point.y==maze.endY&&point.x-1==maze.endX){finish(tmp);}
             else maze.arr[point.y][point.x-1]=2;
-            e.waiter();
+            e.waiterhalf();
         }
         if(point.y+1<maze.arr.length&&(maze.arr[point.y+1][point.x]==0||maze.arr[point.y+1][point.x]==-1)){
             xyPair tmp=new xyPair(point.x,point.y+1);
@@ -52,7 +52,7 @@ public class BFS {
             addToMap(tmp,point);
             if(point.y+1==maze.endY&&point.x==maze.endX){finish(tmp);}
             else maze.arr[point.y+1][point.x]=2;
-            e.waiter();
+            e.waiterhalf();
         }
         if(point.y-1>=0&&(maze.arr[point.y-1][point.x]==0||maze.arr[point.y-1][point.x]==-1)){
             xyPair tmp=new xyPair(point.x,point.y-1);
@@ -60,17 +60,18 @@ public class BFS {
             addToMap(tmp,point);
             if(point.y-1==maze.endY&&point.x==maze.endX){finish(tmp);}
             else maze.arr[point.y-1][point.x]=2;
-            e.waiter();
+            e.waiterhalf();
         }
 
     }
 
     public void find(){
         q.add(new xyPair(maze.startX,maze.startY));
-        while(!q.isEmpty()&&!Stop){e.waiter();
+        while(!q.isEmpty()&&!Stop){e.waiterhalf();
             addAdjacents(q.poll());
 
         }
+        e.isSolving=false;
     }
 
 }

@@ -24,7 +24,7 @@ public class maze {
     public void reversecell(int xpos,int ypos){
         xpos=xpos-10;
         xpos=xpos/10;
-        ypos=ypos-100;
+        ypos=ypos-200;
         ypos=ypos/10;
         if((xpos==startX&&ypos==startY)||(xpos==endX&&ypos==endY)){return;}
         if(this.arr[ypos][xpos]==0&&obs[ypos][xpos]<7){this.obs[ypos][xpos]++;}
@@ -35,7 +35,7 @@ public class maze {
     public void startEnd(int xpos,int ypos){
         xpos=xpos-10;
         xpos=xpos/10;
-        ypos=ypos-100;
+        ypos=ypos-200;
         ypos=ypos/10;
         if(!flag){if(startY!=-1)arr[startY][startX]=0;
             startX=xpos;startY=ypos;

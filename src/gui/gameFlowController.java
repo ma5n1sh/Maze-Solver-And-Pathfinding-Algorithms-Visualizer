@@ -27,7 +27,7 @@ public class gameFlowController extends StateBasedGame {
         try {
             AppGameContainer appc = new AppGameContainer(new gameFlowController(appName));
 
-            appc.setDisplayMode(1280, 720, false);
+            appc.setDisplayMode(1280, 820, false);
             appc.start();
             appc.setTargetFrameRate(30);
 

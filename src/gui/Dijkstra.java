@@ -4,7 +4,7 @@ import mazeData.maze;
 
 import java.util.*;
 
-public class Dijkstra {
+public class Dijkstra implements mazeSolver{
     theEyeOfAgamotto e=new theEyeOfAgamotto();
     mazeData.maze maze;
     public int[][] arr;
@@ -30,7 +30,7 @@ public class Dijkstra {
     public void finish(xyPair xyPair){
         stop=true;
         xyPair =map.get(xyPair.toString());
-        while(xyPair.x!=maze.startX|| xyPair.y!=maze.startY){e.waiter();
+        while(xyPair.x!=maze.startX|| xyPair.y!=maze.startY){e.waiter();e.waiter();
             maze.arr[xyPair.y][xyPair.x]=4;
             xyPair =map.get(xyPair.toString());
         }
@@ -55,7 +55,7 @@ public class Dijkstra {
             }
             if(point.y==maze.endY&&point.x+1==maze.endX){finish(tmp);return;}
             maze.arr[point.y][point.x+1]=2;
-            e.waiter();
+            e.waiterhalf();
         }
         if(point.x-1>=0&&(maze.arr[point.y][point.x-1]==0||maze.arr[point.y][point.x-1]==-1||maze.arr[point.y][point.x-1]==2)&&!(maze.startY==point.y&&maze.startX==point.x-1)){
             xyPair tmp=new xyPair(point.x-1,point.y);
@@ -71,7 +71,7 @@ public class Dijkstra {
             }
             if(point.y==maze.endY&&point.x-1==maze.endX){finish(tmp);return;}
             maze.arr[point.y][point.x-1]=2;
-            e.waiter();
+            e.waiterhalf();
         }
         if(point.y+1<maze.arr.length&&(maze.arr[point.y+1][point.x]==0||maze.arr[point.y+1][point.x]==-1||maze.arr[point.y+1][point.x]==2)&&!(maze.startY==point.y+1&&maze.startX==point.x)){
             xyPair tmp=new xyPair(point.x,point.y+1);
@@ -87,7 +87,7 @@ public class Dijkstra {
             }
             if(point.y+1==maze.endY&&point.x==maze.endX){finish(tmp);return;}
             maze.arr[point.y+1][point.x]=2;
-            e.waiter();
+            e.waiterhalf();
         }
         if(point.y-1>=0&&(maze.arr[point.y-1][point.x]==0||maze.arr[point.y-1][point.x]==-1||maze.arr[point.y-1][point.x]==2)&&!(maze.startY==point.y-1&&maze.startX==point.x)){
             xyPair tmp=new xyPair(point.x,point.y-1);
@@ -103,7 +103,7 @@ public class Dijkstra {
             }
             if(point.y-1==maze.endY&&point.x==maze.endX){finish(tmp);return;}
             maze.arr[point.y-1][point.x]=2;
-            e.waiter();
+            e.waiterhalf();
         }
 
     }
@@ -112,8 +112,8 @@ public class Dijkstra {
         addAdjacents(new xyPair(maze.startX,maze.startY));
         while(!stop&&!pq.storage.isEmpty()){
             addAdjacents(pq.getMin().pair);
-            e.waiter();
+            e.waiterhalf();
         }
-
+        e.isSolving=false;
     }
 }

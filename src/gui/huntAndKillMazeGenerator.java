@@ -2,7 +2,7 @@ package gui;
 
 import java.util.ArrayList;
 
-public class huntAndKillMazeGenerator {
+public class huntAndKillMazeGenerator implements mazeGenerator {
     mazeData.maze maze;
     boolean visited[][];
     theEyeOfAgamotto e=new theEyeOfAgamotto();
@@ -117,6 +117,7 @@ public class huntAndKillMazeGenerator {
             } while (flag);
             start=hunt();
         }
+        e.isGenerating=false;
         /*int count =10;
         while(count>0){
             if(maze.arr[(int)(Math.random()*maze.arr.length)][(int)(Math.random()*maze.arr[0].length)]==1){
@@ -126,14 +127,14 @@ public class huntAndKillMazeGenerator {
                 System.out.println(count);
             }
         }*/
-        for(int i=0;i<maze.arr.length;i+=2){
+        /*for(int i=0;i<maze.arr.length;i+=2){
             for (int j=0;j<maze.arr[0].length;j+=2){
                 if(maze.arr[i][j]==0){
                     maze.obs[i][j]=(int)(Math.random()*8);
                 }
 
             }
-        }
+        }*/
 
     }
 

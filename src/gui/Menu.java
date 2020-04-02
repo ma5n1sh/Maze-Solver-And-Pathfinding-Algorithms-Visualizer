@@ -28,7 +28,7 @@ public class Menu extends BasicGameState {
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         int xpos=Mouse.getX();
-        int ypos=720-Mouse.getY();
+        int ypos=820-Mouse.getY();
         if(Mouse.isButtonDown(0)){
             if(!flag){cont.mouseLPressed(xpos,ypos);flag=true;}
         }
