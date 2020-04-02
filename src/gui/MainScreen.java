@@ -6,14 +6,14 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 
-public class Menu extends BasicGameState {
+public class MainScreen extends BasicGameState {
     boolean flag=false;
     theEyeOfAgamotto e=new theEyeOfAgamotto();
     Image cur;
 
     mazeController cont;
 
-    public Menu(int state) throws SlickException {
+    public MainScreen(int state) throws SlickException {
 
     }
 

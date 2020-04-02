@@ -7,14 +7,11 @@ import org.newdawn.slick.state.StateBasedGame;
 
 
 public class gameFlowController extends StateBasedGame {
-    private static final String appName="Toilet Paper";
+    private static final String appName="Maze Solver And Pathfinding Algorithms Visualizer";
     private static final int menu=0;
-    private static final int play=1;
-
     private gameFlowController(String appName) throws SlickException {
         super(appName);
-        this.addState(new Menu(menu));
-        this.addState(new Play(play));
+        this.addState(new MainScreen(menu));
         this.enterState(menu);
     }
 

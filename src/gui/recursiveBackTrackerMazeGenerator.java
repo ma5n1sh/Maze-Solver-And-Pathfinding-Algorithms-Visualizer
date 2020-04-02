@@ -26,13 +26,15 @@ public class recursiveBackTrackerMazeGenerator implements mazeGenerator{
         if(visited[destination.y][destination.x]){
             return false;
         }
+        e.waiterhalf();
         return true;
+
     }
 
 
     public void recursiveBackTracker(xyPair source){
         maze.arr[source.y][source.x]=3;
-        e.waiter();
+        e.waiterhalf();
         maze.arr[source.y][source.x]=0;
         visited[source.y][source.x]=true;
         xyPair destination;
