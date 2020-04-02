@@ -1,10 +1,7 @@
 package gui;
 
 import mazeData.maze;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 
 
 public class mazeController {
@@ -57,14 +54,33 @@ public class mazeController {
                 else if(maze.arr[i][j]==3){g.setColor(new Color(255,159,28));}
                 else if(maze.arr[i][j]==4){g.setColor(new Color(231,29,54));}
                 else{g.setColor(Color.green);}
-                g.fillRect(10+10*j,200+10*i,10,10);
-                if(maze.obs[i][j]>1) {
-                    g.setLineWidth(1);
-                    g.setColor(Color.black);
-                    g.drawString(Integer.toString(maze.obs[i][j]),10+10*j,200+10*i);
+                g.setLineWidth((float) 0.5);
+                if(maze.obs[i][j]>1&&maze.arr[i][j]==0) {
+                    switch (maze.obs[i][j]){
+                        case 2:g.setColor(new Color(240,240,240));break;
+                        case 3:g.setColor(new Color(210,210,210));break;
+                        case 4:g.setColor(new Color(180,180,180));break;
+                        case 5:g.setColor(new Color(150,150,150));break;
+                        case 6:g.setColor(new Color(120,120,120));break;
+                        default:g.setColor(new Color(47,47,79));break;
+                    }
                 }
-/*                g.setColor(new Color(0,0,0));
-                g.drawRect(10+20*j,100+20*i,20,20);*/
+                g.fillRect(10+10*j,200+10*i,10,10);
+            }
+
+
+
+
+        }
+    }
+
+    public void generateweight(){
+        for(int i=0;i<maze.arr.length;i+=2) {
+            for (int j = 0; j < maze.arr[0].length; j += 2) {
+                if (maze.arr[i][j] == 0) {
+                    maze.obs[i][j] = (int) (Math.random() * 8);
+                }
+
             }
         }
     }
@@ -138,6 +154,10 @@ public class mazeController {
                 }
             }).start();
         }
+        else if(xpos>1000&&xpos<1000+generateweight.getWidth()&&ypos>66&&ypos<66+reset.getHeight()){
+            generateweight();
+        }
+
         else if(xpos>1182&&xpos<1182+reset.getWidth()&&ypos>66&&ypos<66+reset.getHeight()){
             maze=new maze();
         }
