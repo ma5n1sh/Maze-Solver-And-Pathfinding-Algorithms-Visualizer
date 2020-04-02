@@ -20,6 +20,7 @@ public class mazeController {
     }
 
     public void Backup(){
+        backup=new int[maze.arr.length][maze.arr[0].length];
         for(int i=0;i<60;i++){
             for(int j=0;j<126;j++){backup[i][j]=maze.arr[i][j];}
         }
@@ -164,6 +165,7 @@ public class mazeController {
 
         else if(xpos>1060&&xpos<1060+resetsol.getWidth()&&ypos>120&&ypos<120+resetsol.getHeight()){
             maze.arr=backup;
+            Backup();
         }
 
 
