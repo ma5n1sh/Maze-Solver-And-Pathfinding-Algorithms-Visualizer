@@ -2,7 +2,7 @@ package Algorithms;
 
 import java.util.HashMap;
 
-import mazeData.arraylist;
+import mazeData.customPriorityQueue;
 import mazeData.difCoorPair;
 import Controller.theEyeOfAgamotto;
 import mazeData.xyPair;
@@ -13,7 +13,7 @@ public class AStar implements mazeSolver{
         mazeData.maze maze;
         public int[][] arr;
         HashMap<String, xyPair> map=new HashMap<>();
-        arraylist pq=new arraylist();
+        customPriorityQueue pq=new customPriorityQueue();
         boolean stop=false;
 
         private int distanceCalculator(xyPair point){

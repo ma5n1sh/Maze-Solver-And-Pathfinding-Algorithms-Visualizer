@@ -1,7 +1,9 @@
-package gui;
+package Controller;
 
 import Algorithms.*;
+import Controller.theEyeOfAgamotto;
 import mazeData.maze;
+import mazeData.xyPair;
 import org.newdawn.slick.*;
 
 
@@ -86,6 +88,29 @@ public class mazeController {
         }
     }
 
+  /*  private boolean[] surroundingArray(xyPair xy){
+        boolean tmp[]={false,false,false,false};
+        if(xy.y-1>=0&&maze.arr[xy.y-1][xy.x]==4)tmp[0]=true;
+        if(xy.y+1<maze.arr.length&&maze.arr[xy.y+1][xy.x]==4)tmp[2]=true;
+        if(xy.x+1<maze.arr[0].length&&maze.arr[xy.y][xy.x+1]==4)tmp[1]=true;
+        if(xy.x-1>=0&&maze.arr[xy.y][xy.x-1]==4)tmp[3]=true;
+        return tmp;
+
+    }
+
+    private void darwLine(Graphics g){
+        g.setColor(Color.white);
+        g.setLineWidth(2);
+        for(int i=0;i<maze.arr.length;i++) {
+            for (int j = 0; j < maze.arr[0].length; j++) {
+                if(maze.arr[i][j]==4){
+                    boolean tmp[]=surroundingArray(new xyPair(j,i));
+                    if(boolean){}
+                }
+            }
+        }
+    }*/
+
     public void generateweight(){
         for(int i=0;i<maze.arr.length;i+=2) {
             for (int j = 0; j < maze.arr[0].length; j += 2) {
@@ -97,7 +122,7 @@ public class mazeController {
         }
     }
 
-    void mouseLPressed(int xpos,int ypos){
+    public void mouseLPressed(int xpos, int ypos){
 
         if(xpos>10&&xpos<1260&&ypos>200&&ypos<800){
             maze.reversecell(xpos,ypos);
@@ -183,7 +208,7 @@ public class mazeController {
 
 
     }
-    void mouseRPressed(int xpos,int ypos){
+    public void mouseRPressed(int xpos, int ypos){
         if(xpos>10&&xpos<1260&&ypos>200&&ypos<800){
             maze.startEnd(xpos,ypos);
         }

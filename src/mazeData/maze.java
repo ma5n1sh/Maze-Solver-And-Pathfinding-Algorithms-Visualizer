@@ -6,6 +6,7 @@ public class maze {
     public int arr[][]=new int[60][126],obs[][]=new int[60][126];
     public int startX=-1,startY=-1,endX=-1,endY=-1;
     boolean flag=false;
+    ArrayList<xyPair>paths=new ArrayList<xyPair>();
 
     public maze() {
         for(int i=0;i<60;i++){

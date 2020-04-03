@@ -2,7 +2,7 @@ package mazeData;
 
 import java.util.ArrayList;
 
-public class arraylist {
+public class customPriorityQueue {
     public ArrayList<difCoorPair> storage=new ArrayList<difCoorPair>();
     public void add(difCoorPair a){
         storage.add(a);

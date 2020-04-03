@@ -1,5 +1,7 @@
 package gui;
 
+import Controller.mazeController;
+import Controller.theEyeOfAgamotto;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
@@ -27,6 +29,8 @@ public class MainScreen extends BasicGameState {
         int ypos=820-Mouse.getY();
         g.drawImage(cur,xpos-20,ypos-20);
         cont.draw(g);
+        g.setColor(Color.black);
+        g.drawString("MA5N1SH",1208,803);
 
     }
 
