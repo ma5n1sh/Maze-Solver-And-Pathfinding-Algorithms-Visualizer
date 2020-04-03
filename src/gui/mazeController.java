@@ -1,5 +1,6 @@
 package gui;
 
+import Algorithms.*;
 import mazeData.maze;
 import org.newdawn.slick.*;
 

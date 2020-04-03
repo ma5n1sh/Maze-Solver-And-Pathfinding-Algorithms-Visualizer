@@ -1,6 +1,7 @@
-package gui;
+package Algorithms;
 
-import mazeData.maze;
+import Controller.theEyeOfAgamotto;
+import mazeData.xyPair;
 
 import java.util.ArrayList;
 

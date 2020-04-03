@@ -1,4 +1,4 @@
-package gui;
+package mazeData;
 
 public class difCoorPair implements Comparable<difCoorPair> {
      public int difficulty=0;

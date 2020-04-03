@@ -19,6 +19,7 @@ public class gameFlowController extends StateBasedGame {
         this.getState(menu).init(gc,this);
         gc.setTargetFrameRate(60);
         gc.setShowFPS(false);
+
     }
 
     public static void main(String[] args) {

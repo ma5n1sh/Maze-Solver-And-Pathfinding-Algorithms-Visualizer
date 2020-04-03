@@ -27,6 +27,7 @@ public class MainScreen extends BasicGameState {
         int ypos=820-Mouse.getY();
         g.drawImage(cur,xpos-20,ypos-20);
         cont.draw(g);
+
     }
 
 

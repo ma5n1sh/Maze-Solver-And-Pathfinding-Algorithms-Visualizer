@@ -1,8 +1,10 @@
-package gui;
+package Algorithms;
 
+import Controller.theEyeOfAgamotto;
+import mazeData.xyPair;
 import mazeData.maze;
 import java.util.*;
-public class BFS implements mazeSolver{
+public class BFS implements mazeSolver {
     maze maze;
     HashMap<String, xyPair> map=new HashMap<>();
     Queue <xyPair>q=new LinkedList();

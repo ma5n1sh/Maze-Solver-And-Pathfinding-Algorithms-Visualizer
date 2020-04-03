@@ -1,4 +1,4 @@
-package gui;
+package mazeData;
 
 import java.util.ArrayList;
 

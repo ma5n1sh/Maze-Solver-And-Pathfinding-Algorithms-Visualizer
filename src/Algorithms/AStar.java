@@ -1,10 +1,14 @@
-package gui;
+package Algorithms;
 
 import java.util.HashMap;
-import mazeData.maze;
+
+import mazeData.arraylist;
+import mazeData.difCoorPair;
+import Controller.theEyeOfAgamotto;
+import mazeData.xyPair;
 
 
-    public class AStar implements mazeSolver{
+public class AStar implements mazeSolver{
         theEyeOfAgamotto e=new theEyeOfAgamotto();
         mazeData.maze maze;
         public int[][] arr;

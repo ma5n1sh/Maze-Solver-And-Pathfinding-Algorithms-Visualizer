@@ -1,4 +1,4 @@
-package gui;
+package mazeData;
 
 public class xyPair {
     public int x,y;

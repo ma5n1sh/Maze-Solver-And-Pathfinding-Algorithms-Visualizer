@@ -1,7 +1,5 @@
 package mazeData;
 
-import gui.xyPair;
-
 import java.util.ArrayList;
 
 public class maze {

@@ -1,6 +1,4 @@
-package gui;
-
-//this class contains the time stone that controls the flow of time
+package Controller;//this class contains the time stone that controls the flow of time
 
 public class theEyeOfAgamotto {
     public static long time=0;
