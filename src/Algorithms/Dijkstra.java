@@ -103,7 +103,7 @@ public class Dijkstra implements mazeSolver{
                 pq.add(new difCoorPair(arr[point.y][point.x]+maze.obs[point.y-1][point.x],tmp));
                 addToMap(tmp,point);
             }
-            else if(arr[point.y][point.x+1]>arr[point.y][point.x]+maze.obs[point.y][point.x+1]){
+            else if(arr[point.y-1][point.x]>arr[point.y][point.x]+maze.obs[point.y-1][point.x]){
                 arr[point.y-1][point.x]=arr[point.y][point.x]+maze.obs[point.y-1][point.x];
                 pq.add(new difCoorPair(arr[point.y][point.x]+maze.obs[point.y-1][point.x],tmp));
                 addToMap(tmp,point);

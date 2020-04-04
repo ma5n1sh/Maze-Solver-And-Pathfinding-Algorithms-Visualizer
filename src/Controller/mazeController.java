@@ -124,7 +124,7 @@ public class mazeController {
 
     public void mouseLPressed(int xpos, int ypos){
 
-        if(xpos>10&&xpos<1260&&ypos>200&&ypos<800){
+        if(xpos>10&&xpos<1270&&ypos>200&&ypos<800){
             maze.reversecell(xpos,ypos);
         }
         else if( xpos>1000&&xpos<1000+generatekillhunt.getWidth()&&ypos>10&&ypos<56&&!e.isGenerating&&!e.isSolving){
@@ -209,7 +209,7 @@ public class mazeController {
 
     }
     public void mouseRPressed(int xpos, int ypos){
-        if(xpos>10&&xpos<1260&&ypos>200&&ypos<800){
+        if(xpos>10&&xpos<1270&&ypos>200&&ypos<800){
             maze.startEnd(xpos,ypos);
         }
 

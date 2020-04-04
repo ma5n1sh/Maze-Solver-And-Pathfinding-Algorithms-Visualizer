@@ -69,7 +69,7 @@ public class AStar implements mazeSolver{
                     pq.add(new difCoorPair(arr[point.y][point.x]+maze.obs[point.y][point.x+1]+distanceCalculator(tmp),tmp));
                     addToMap(tmp,point);
                 }
-                if(pq.peek().y==maze.endY&&pq.peek().x==maze.endX){finish();return;}
+              //  if(pq.peek().y==maze.endY&&pq.peek().x==maze.endX){finish();return;}
                 maze.arr[point.y][point.x+1]=2;
                 e.waiterhalf();
             }
@@ -85,7 +85,7 @@ public class AStar implements mazeSolver{
                     pq.add(new difCoorPair(arr[point.y][point.x]+maze.obs[point.y][point.x+1]+distanceCalculator(tmp),tmp));
                     addToMap(tmp,point);
                 }
-                if(pq.peek().y==maze.endY&&pq.peek().x==maze.endX){finish();return;}
+                //if(pq.peek().y==maze.endY&&pq.peek().x==maze.endX){finish();return;}
                 maze.arr[point.y][point.x-1]=2;
                 e.waiterhalf();
             }
@@ -101,7 +101,7 @@ public class AStar implements mazeSolver{
                     pq.add(new difCoorPair(arr[point.y][point.x]+maze.obs[point.y+1][point.x]+distanceCalculator(tmp),tmp));
                     addToMap(tmp,point);
                 }
-                if(pq.peek().y==maze.endY&&pq.peek().x==maze.endX){finish();return;}
+                //if(pq.peek().y==maze.endY&&pq.peek().x==maze.endX){finish();return;}
                 maze.arr[point.y+1][point.x]=2;
                 e.waiterhalf();
             }
@@ -112,12 +112,12 @@ public class AStar implements mazeSolver{
                     pq.add(new difCoorPair(arr[point.y][point.x]+maze.obs[point.y-1][point.x]+distanceCalculator(tmp),tmp));
                     addToMap(tmp,point);
                 }
-                else if(arr[point.y][point.x+1]>arr[point.y][point.x]+maze.obs[point.y][point.x+1]){
+                else if(arr[point.y-1][point.x]>arr[point.y][point.x]+maze.obs[point.y-1][point.x]){
                     arr[point.y-1][point.x]=arr[point.y][point.x]+maze.obs[point.y-1][point.x];
                     pq.add(new difCoorPair(arr[point.y][point.x]+maze.obs[point.y-1][point.x]+distanceCalculator(tmp),tmp));
                     addToMap(tmp,point);
                 }
-                if(pq.peek().y==maze.endY&&pq.peek().x==maze.endX){finish();return;}
+                //if(pq.peek().y==maze.endY&&pq.peek().x==maze.endX){finish();return;}
                 maze.arr[point.y-1][point.x]=2;
                 e.waiterhalf();
             }
@@ -127,6 +127,10 @@ public class AStar implements mazeSolver{
         public void find () {
             addAdjacents(new xyPair(maze.startX,maze.startY));
             while(!stop&&!pq.storage.isEmpty()){
+                if(pq.peek().x==maze.endX&&pq.peek().y==maze.endY){
+                    finish();
+                    continue;
+                }
                 addAdjacents(pq.getMin().pair);
                 e.waiterhalf();
             }

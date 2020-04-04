@@ -6,7 +6,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 
-public class gameFlowController extends StateBasedGame {
+public class     gameFlowController extends StateBasedGame {
     private static final String appName="Maze Solver And Pathfinding Algorithms Visualizer";
     private static final int menu=0;
     private gameFlowController(String appName) throws SlickException {
