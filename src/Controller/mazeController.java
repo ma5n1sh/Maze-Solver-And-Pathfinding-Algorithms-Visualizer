@@ -12,7 +12,8 @@ public class mazeController {
     mazeSolver b;
     mazeGenerator hak;
     theEyeOfAgamotto e=new theEyeOfAgamotto();
-    boolean play=false,solvedFlag=false,colrflag=false;
+    boolean solvedFlag=false,colrflag=false;
+    public boolean play=false;
     Play playalgo;
     Image[] generatekillhunt={new Image("res/shk.png"),new Image("res/deacshk.png")},
             generaterbt={new Image("res/srbt.png"),new Image("res/deacsrbt.png")},
@@ -59,7 +60,7 @@ public class mazeController {
         g.drawImage(reset,1182,66);
         g.drawImage(solveactive()?solved[0]:solved[1],755,120);
         g.drawImage(solveactive()?resetsol[0]:resetsol[1],1060,120);
-        g.drawImage(solveactive()?playbut[0]:playbut[1],530,10);
+        g.drawImage(solveactive()&&!play?playbut[0]:playbut[1],530,10);
         //_________________________________________________________
         //maze
         g.setColor(new Color(1,22,39));
@@ -104,8 +105,8 @@ public class mazeController {
     }
 
     public void initiatePlay(){
-        Backup();
-        playalgo=new Play(maze);
+        resetSolu();
+        playalgo=new Play(maze,this);
     }
 
   /*  private boolean[] surroundingArray(xyPair xy){
@@ -200,7 +201,7 @@ public class mazeController {
             }).start();
 
         }
-        else if( xpos>530&&xpos<530+playbut[0].getWidth()&&ypos>10&&ypos<10+playbut[0].getHeight()&&!e.isGenerating&&!e.isSolving&&!solvedFlag){
+        else if( xpos>530&&xpos<530+playbut[0].getWidth()&&ypos>10&&ypos<10+playbut[0].getHeight()&&!e.isGenerating&&!e.isSolving&&!solvedFlag&&!play){
            initiatePlay();
             play=true;
         }
@@ -271,6 +272,7 @@ public class mazeController {
 
         else if(xpos>1060&&xpos<1060+resetsol[0].getWidth()&&ypos>120&&ypos<120+resetsol[0].getHeight()&&!e.isSolving){
             resetSolu();
+            if(playalgo!=null){play=false;}
         }
 
 
@@ -284,8 +286,8 @@ public class mazeController {
     }
     public void mouseRPressed(int xpos, int ypos){
         if(xpos>10&&xpos<1270&&ypos>200&&ypos<800){
-            if(!solvedFlag)Backup();
             maze.startEnd(xpos,ypos);
+            if(!solvedFlag)Backup();
         }
 
 
