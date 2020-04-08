@@ -12,18 +12,22 @@ public class mazeController {
     mazeSolver b;
     mazeGenerator hak;
     theEyeOfAgamotto e=new theEyeOfAgamotto();
+    boolean play=false,solvedFlag=false,colrflag=false;
+    Play playalgo;
     Image[] generatekillhunt={new Image("res/shk.png"),new Image("res/deacshk.png")},
             generaterbt={new Image("res/srbt.png"),new Image("res/deacsrbt.png")},
             solvedfs={new Image("res/sdfs.png"),new Image("res/deacsdfs.png")},
             solvebfs={new Image("res/sbfs.png"),new Image("res/deacsbfs.png")},
             solvea={new Image("res/sa.png"),new Image("res/deacsa.png")},
             solved={new Image("res/sd.png"),new Image("res/deacsd.png")},
-            resetsol={new Image("res/reset solution.png"),new Image("res/deacreset solution.png")};
+            resetsol={new Image("res/reset solution.png"),new Image("res/deacreset solution.png")},
+            playbut={new Image("res/play.png"),new Image("res/deacplay.png")};
     int backup[][]=new int[maze.arr.length][maze.arr[0].length];
     Image reset=new Image("res/reset.png"),title=new Image("res/title.png"),generateweight=new Image("res/button.png");
-    public mazeController() throws SlickException {
-        for(int i=0;i<10;i++){e.waiter();}
+    long time;
 
+    public mazeController() throws SlickException {
+        time= System.currentTimeMillis();
     }
 
     public void Backup(){
@@ -39,6 +43,7 @@ public class mazeController {
     }
 
     public void draw (Graphics g){
+        if(System.currentTimeMillis()-time>500){time=System.currentTimeMillis();colrflag=!colrflag;}
         //background
         g.setColor(new Color(46,196,182));
         g.fillRect(0,0,1280,820);
@@ -54,6 +59,7 @@ public class mazeController {
         g.drawImage(reset,1182,66);
         g.drawImage(solveactive()?solved[0]:solved[1],755,120);
         g.drawImage(solveactive()?resetsol[0]:resetsol[1],1060,120);
+        g.drawImage(solveactive()?playbut[0]:playbut[1],530,10);
         //_________________________________________________________
         //maze
         g.setColor(new Color(1,22,39));
@@ -65,6 +71,7 @@ public class mazeController {
                 else if(maze.arr[i][j]==2){g.setColor(new Color(255,87,51));}
                 else if(maze.arr[i][j]==3){g.setColor(new Color(255,159,28));}
                 else if(maze.arr[i][j]==4){g.setColor(new Color(231,29,54));}
+                else if(maze.arr[i][j]==5){g.setColor(colrflag?Color.cyan:new Color(253,255,252));}
                 else{g.setColor(Color.green);}
                 g.setLineWidth((float) 0.5);
                 if(maze.obs[i][j]>1&&maze.arr[i][j]==0) {
@@ -96,6 +103,11 @@ public class mazeController {
         }
     }
 
+    public void initiatePlay(){
+        Backup();
+        playalgo=new Play(maze);
+    }
+
   /*  private boolean[] surroundingArray(xyPair xy){
         boolean tmp[]={false,false,false,false};
         if(xy.y-1>=0&&maze.arr[xy.y-1][xy.x]==4)tmp[0]=true;
@@ -119,6 +131,51 @@ public class mazeController {
         }
     }*/
 
+
+    public void playup(){
+        if(play){
+            new Thread(new Runnable() {
+                public void run() {
+                    playalgo.goUp();
+                }
+            }).start();
+
+
+        }
+    }
+    public void playdown(){
+        if(play){
+            new Thread(new Runnable() {
+                public void run() {
+                    playalgo.goDown();
+                }
+            }).start();
+
+
+        }
+    }
+    public void playleft(){
+        if(play){
+            new Thread(new Runnable() {
+                public void run() {
+                    playalgo.goLeft();
+                }
+            }).start();
+
+
+        }
+    }
+    public void playright(){
+        if(play){
+            new Thread(new Runnable() {
+                public void run() {
+                    playalgo.goRight();
+                }
+            }).start();
+
+        }
+    }
+
     public void generateweight(){
         for(int i=0;i<1000;i++) {
             maze.reversecell(10+(int)(Math.random()*1260),200+(int)(Math.random()*600));
@@ -129,6 +186,7 @@ public class mazeController {
 
         if(xpos>10&&xpos<1270&&ypos>200&&ypos<800){
             maze.reversecell(xpos,ypos);
+            if(!solvedFlag)Backup();
         }
         else if( xpos>1000&&xpos<1000+generatekillhunt[0].getWidth()&&ypos>10&&ypos<56&&!e.isGenerating&&!e.isSolving){
             e.isGenerating=true;
@@ -142,10 +200,13 @@ public class mazeController {
             }).start();
 
         }
+        else if( xpos>530&&xpos<530+playbut[0].getWidth()&&ypos>10&&ypos<10+playbut[0].getHeight()&&!e.isGenerating&&!e.isSolving&&!solvedFlag){
+           initiatePlay();
+            play=true;
+        }
         else if(xpos>650&&xpos<1000+generaterbt[0].getWidth()&&ypos>10&&ypos<56&&!e.isGenerating&&!e.isSolving){
             e.isGenerating=true;
             hak=new recursiveBackTrackerMazeGenerator(maze);
-
             new Thread(new Runnable() {
                 public void run() {
                     hak.generateMaze();
@@ -154,7 +215,7 @@ public class mazeController {
         }
         else if(xpos>650&&xpos<650+solvedfs[0].getWidth()&&ypos>66&&ypos<66+solvedfs[0].getHeight()&&maze.endY!=-1&&!e.isGenerating&&!e.isSolving){
             e.isSolving=true;
-            Backup();
+            resetSolu();
             new Thread(new Runnable() {
                 public void run() {
                     b=new DFS(maze);
@@ -164,10 +225,12 @@ public class mazeController {
         }
 
         else if(xpos>770&&xpos<770+solvebfs[0].getWidth()&&ypos>66&&ypos<66+solvebfs[0].getHeight()&&maze.endY!=-1&&!e.isGenerating&&!e.isSolving){
-            Backup();
+            resetSolu();
+            solvedFlag=true;
             e.isSolving=true;
             new Thread(new Runnable() {
                 public void run() {
+                    solvedFlag=true;
                     b=new BFS(maze);
                     b.find();
                 }
@@ -175,7 +238,8 @@ public class mazeController {
         }
         else if(xpos>890&&xpos<890+solvea[0].getWidth()&&ypos>66&&ypos<66+solvebfs[0].getHeight()&&maze.endY!=-1&&!e.isGenerating&&!e.isSolving){
             e.isSolving=true;
-            Backup();
+            resetSolu();
+            solvedFlag=true;
             new Thread(new Runnable() {
                 public void run() {
                     b=new AStar(maze);
@@ -186,7 +250,8 @@ public class mazeController {
 
         else if(xpos>775&&xpos<775+solved[0].getWidth()&&ypos>120&&ypos<120+solved[0].getHeight()&&maze.endY!=-1&&!e.isGenerating&&!e.isSolving){
             e.isSolving=true;
-            Backup();
+            resetSolu();
+            solvedFlag=true;
             new Thread(new Runnable() {
                 public void run() {
                     b=new Dijkstra(maze);
@@ -205,21 +270,27 @@ public class mazeController {
         }
 
         else if(xpos>1060&&xpos<1060+resetsol[0].getWidth()&&ypos>120&&ypos<120+resetsol[0].getHeight()&&!e.isSolving){
-            maze.arr=backup;
-            Backup();
+            resetSolu();
         }
 
 
 
 
     }
+    public void resetSolu(){
+        maze.arr=backup;
+        solvedFlag=false;
+        Backup();
+    }
     public void mouseRPressed(int xpos, int ypos){
         if(xpos>10&&xpos<1270&&ypos>200&&ypos<800){
+            if(!solvedFlag)Backup();
             maze.startEnd(xpos,ypos);
         }
 
 
     }
+
 
 
 }

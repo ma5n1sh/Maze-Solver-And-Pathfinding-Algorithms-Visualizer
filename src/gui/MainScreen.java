@@ -9,9 +9,11 @@ import org.newdawn.slick.state.StateBasedGame;
 
 
 public class MainScreen extends BasicGameState {
-    boolean flag=false;
+    boolean flag=false,keybord=true;
     theEyeOfAgamotto e=new theEyeOfAgamotto();
     Image cur;
+    int curentTime;
+
 
     mazeController cont;
 
@@ -38,6 +40,7 @@ public class MainScreen extends BasicGameState {
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         int xpos=Mouse.getX();
         int ypos=820-Mouse.getY();
+        Input input1 = gc.getInput();
         if(Mouse.isButtonDown(0)){
             if(!flag){cont.mouseLPressed(xpos,ypos);flag=true;}
         }
@@ -47,6 +50,25 @@ public class MainScreen extends BasicGameState {
         if(!Mouse.isButtonDown(0)&&!Mouse.isButtonDown(1)){
             flag=false;
         }
+        if(input1.isKeyDown(Input.KEY_UP)&&keybord){
+            keybord=false;
+            cont.playup();
+        }
+        if(input1.isKeyDown(Input.KEY_DOWN)&&keybord){
+            keybord=false;
+            cont.playdown();
+        }
+        if(input1.isKeyDown(Input.KEY_LEFT)&&keybord){
+            keybord=false;
+            cont.playleft();
+        }
+        if(input1.isKeyDown(Input.KEY_RIGHT)&&keybord){
+            keybord=false;
+            cont.playright();
+        }
+        if(!input1.isKeyDown(Input.KEY_RIGHT)&&!input1.isKeyDown(Input.KEY_DOWN)&&!input1.isKeyDown(Input.KEY_UP)&&!input1.isKeyDown(Input.KEY_LEFT)&&!keybord)keybord=true;
+
+
         //e.time+=delta;
     }
 
