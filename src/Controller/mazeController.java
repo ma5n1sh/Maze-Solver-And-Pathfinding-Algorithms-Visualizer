@@ -190,9 +190,10 @@ public class mazeController {
             if(!solvedFlag)Backup();
         }
         else if( xpos>1000&&xpos<1000+generatekillhunt[0].getWidth()&&ypos>10&&ypos<56&&!e.isGenerating&&!e.isSolving){
+            this.maze=new maze();
             e.isGenerating=true;
             hak=new huntAndKillMazeGenerator(maze);
-
+            play=false;
             new Thread(new Runnable() {
                 public void run() {
                     hak.generateMaze();
@@ -201,13 +202,15 @@ public class mazeController {
             }).start();
 
         }
-        else if( xpos>530&&xpos<530+playbut[0].getWidth()&&ypos>10&&ypos<10+playbut[0].getHeight()&&!e.isGenerating&&!e.isSolving&&!solvedFlag&&!play){
+        else if( xpos>530&&xpos<530+playbut[0].getWidth()&&ypos>10&&ypos<10+playbut[0].getHeight()&&!e.isGenerating&&!e.isSolving&&!play&&maze.endY!=-1){
            initiatePlay();
             play=true;
         }
         else if(xpos>650&&xpos<1000+generaterbt[0].getWidth()&&ypos>10&&ypos<56&&!e.isGenerating&&!e.isSolving){
+            this.maze=new maze();
             e.isGenerating=true;
             hak=new recursiveBackTrackerMazeGenerator(maze);
+            play=false;
             new Thread(new Runnable() {
                 public void run() {
                     hak.generateMaze();
@@ -268,6 +271,8 @@ public class mazeController {
             this.maze=new maze();
             e.isGenerating=false;
             e.isSolving=false;
+            playalgo=null;
+            play=false;
         }
 
         else if(xpos>1060&&xpos<1060+resetsol[0].getWidth()&&ypos>120&&ypos<120+resetsol[0].getHeight()&&!e.isSolving){
