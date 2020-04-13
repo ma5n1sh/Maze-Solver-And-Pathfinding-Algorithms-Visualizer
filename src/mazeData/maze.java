@@ -89,6 +89,7 @@ public class maze {
         xpos=xpos/10;
         ypos=ypos-200;
         ypos=ypos/10;
+        if(arr[ypos][xpos]!=0)return;
         if(!flag){if(startY!=-1)arr[startY][startX]=0;
             startX=xpos;startY=ypos;
         }
